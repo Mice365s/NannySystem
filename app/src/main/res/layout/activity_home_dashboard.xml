@@ -31,6 +31,15 @@
             android:text="Logout"
             android:textColor="#FFFFFF"
             android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#D32F2F"
+            android:text="Logout"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"/>
     </LinearLayout>
 
     <!-- The Scrolling List of Nannies -->

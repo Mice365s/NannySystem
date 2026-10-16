@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NannySystem">
         <activity
+            android:name=".HelpActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminReportsActivity"
             android:exported="false" />
         <activity

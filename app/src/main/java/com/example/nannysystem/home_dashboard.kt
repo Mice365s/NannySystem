@@ -36,6 +36,13 @@ class home_dashboard : AppCompatActivity() {
             sessionManager.logoutUser()
         }
 
+        // Added Help Button Logic
+        val btnHelp = findViewById<Button>(R.id.btnHelp)
+        btnHelp.setOnClickListener {
+            val intent = Intent(this, HelpActivity::class.java)
+            startActivity(intent)
+        }
+
         fetchNanniesFromFirebase()
     }
 
