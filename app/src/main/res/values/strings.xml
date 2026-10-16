@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">NannySystem</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_subtitle">Please login to access your account</string>
+    <string name="email_label">Email address:</string>
+    <string name="email_hint">Enter your email</string>
+    <string name="password_label">Password:</string>
+    <string name="password_hint">Enter your password</string>
+    <string name="remember_me">Remember for 30 days</string>
+    <string name="login_button">Login</string>
+    <string name="no_account">Don\'t have an account? </string>
+    <string name="sign_up">Sign Up</string>
+
+    <string name="register_title">Create Account</string>
+    <string name="name_label">Full Name:</string>
+    <string name="name_hint">Enter your full name</string>
+    <string name="select_role_label">Select your role:</string>
+    <string name="role_parent">Parent</string>
+    <string name="role_nanny">Nanny</string>
+    <string name="role_admin">Admin</string>
+    <string name="terms_and_conditions">I accept the Terms and Conditions</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="have_account">Already have an account? </string>
+    <string name="sign_in">Sign In</string>
+
+    <string name="filters_text">Filters: Location | Price | Rating</string>
+    <string name="logout">Logout</string>
+    <string name="nanny_card_label">Verified Nanny</string>
+    <string name="image_placeholder">Image</string>
+    <string name="view_profile">View Profile >></string>
+
+    <string name="book_nanny_title">Book Nanny</string>
+    <string name="booking_for">Booking for: </string>
+    <string name="select_date">Select Date:</string>
+    <string name="date_hint">DD/MM/YYYY</string>
+    <string name="select_time">Select Time:</string>
+    <string name="time_hint">HH:MM</string>
+    <string name="duration">Duration (hrs):</string>
+    <string name="duration_hint">e.g., 5</string>
+    <string name="total_cost">Total Cost: R500</string>
+    <string name="confirm_booking">Confirm Booking</string>
+
+    <string name="payment_method_title">Payment Method</string>
+    <string name="back_button">← Back</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="name_on_card_hint">Enter Name on Card</string>
+    <string name="card_number_hint">Card Number</string>
+    <string name="expire_date_hint">Expire Date</string>
+    <string name="cvv_hint">CVV</string>
+    <string name="confirm_payment_btn">Confirm Payment</string>
+
+    <string name="admin_panel_title">Admin Panel</string>
+    <string name="total_users_dynamic">Total Users: %1$d</string>
+    <string name="total_bookings_dynamic">Total Bookings: %1$d</string>
+    <string name="manage_users_btn">Manage Users</string>
+    <string name="view_reports_btn">View Reports</string>
+</resources>

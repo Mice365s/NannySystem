@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1025730282560",
+    "project_id": "nanny-system-9e2e1",
+    "storage_bucket": "nanny-system-9e2e1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025730282560:android:e6eb3d6091beb992378ba5",
+        "android_client_info": {
+          "package_name": "com.example.nannysystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4E7KP42Qs5ElACDMV0En889Ibd1Eg2Gs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
