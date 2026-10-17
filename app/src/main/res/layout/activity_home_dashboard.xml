@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#D32F2F"
-            android:text="Logout"
+            android:text="Help"
             android:textColor="#FFFFFF"
             android:textSize="12sp"/>
     </LinearLayout>
