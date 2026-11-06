@@ -44,6 +44,8 @@
         <activity
             android:name=".parent_view_nanny" />
         <activity
+            android:name=".chat_screen" />
+        <activity
             android:name=".login"
             android:exported="true">
             <intent-filter>

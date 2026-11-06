@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class home_dashboard : AppCompatActivity() {
 
@@ -56,6 +57,27 @@ class home_dashboard : AppCompatActivity() {
         }
 
         fetchNanniesFromFirebase()
+
+        //navigation bar
+        val bottomNav = findViewById<BottomNavigationView>(R.id.parentBottomNav)
+
+        bottomNav.selectedItemId = R.id.nav_parent_home
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.nav_parent_home -> {
+                    true
+                }
+
+                R.id.nav_parent_bookings -> {
+                    val intent = Intent(this, parent_bookings::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 
     private fun fetchNanniesFromFirebase() {

@@ -21,8 +21,8 @@ class payment_dashboard : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 
         // Get the booking details passed from ParentBookingAdapter
-        bookingId = intent.getStringExtra("bookingId")
-        val nannyName = intent.getStringExtra("nannyName") ?: "Nanny"
+        bookingId = intent.getStringExtra("BOOKING_ID")
+        val nannyName = intent.getStringExtra("NANNY_NAME") ?: "Nanny"
 
         val tvHeader = findViewById<TextView>(R.id.tvPaymentHeader)
         tvHeader.text = "Pay $nannyName"
@@ -50,7 +50,7 @@ class payment_dashboard : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Optional: Force a minimum rating before they can pay
+            // Force a minimum rating before they can pay
             if (finalRating == 0f) {
                 Toast.makeText(this, "Please provide a rating before paying", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

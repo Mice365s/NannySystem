@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="4dp">
+
+    <!-- Sent Message (Right side, Green) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
+        app:cardBackgroundColor="#3A8F46"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tvSentMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Received Message (Left side, Brown/Tan) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardReceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="60dp"
+        app:cardBackgroundColor="#F3D8B6"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tvReceivedMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

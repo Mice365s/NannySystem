@@ -1,5 +1,6 @@
 package com.example.nannysystem
 
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,8 @@ class BookingRequestAdapter(private val bookingList: List<BookingModel>) : Recyc
         val btnAccept: Button = view.findViewById(R.id.btnAcceptReq)
         val btnDecline: Button = view.findViewById(R.id.btnDeclineReq)
         val btnComplete: Button = view.findViewById(R.id.btnComplete)
+
+        val btnChat: Button = view.findViewById(R.id.btnChat)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -81,6 +84,23 @@ class BookingRequestAdapter(private val bookingList: List<BookingModel>) : Recyc
         // Handle Complete Click
         holder.btnComplete.setOnClickListener {
             db.collection("bookings").document(booking.id).update("status", "completed")
+        }
+
+        // 1. Show the chat button ONLY when the job is accepted or completed
+        when (booking.status) {
+            "accepted", "completed" -> holder.btnChat.visibility = View.VISIBLE
+            else -> holder.btnChat.visibility = View.GONE
+        }
+
+       // Add the click listener
+        holder.btnChat.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, chat_screen::class.java)
+
+            intent.putExtra("BOOKING_ID", booking.id)
+            intent.putExtra("OTHER_PERSON_NAME", booking.parentName) // So the nanny sees the Parent's name at the top
+
+            context.startActivity(intent)
         }
     }
 

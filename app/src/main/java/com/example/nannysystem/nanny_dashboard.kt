@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class nanny_dashboard : AppCompatActivity() {
 
@@ -38,7 +39,18 @@ class nanny_dashboard : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnNannyLogout).setOnClickListener {
-            startActivity(Intent(this,login::class.java))
+            // 1. Actually wipe the saved login data
+            sessionManager.logoutUser()
+
+            // 2. Open the login screen
+            val intent = Intent(this, login::class.java)
+
+            // 3. Destroy the back history so they can't swipe back in
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
+            // 4. Close this dashboard
+            finish()
         }
 
         // Setup RecyclerView
@@ -49,6 +61,24 @@ class nanny_dashboard : AppCompatActivity() {
 
         if (nannyId != null) {
             fetchBookings(nannyId)
+        }
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.nannyBottomNav)
+
+        bottomNav.selectedItemId = R.id.nav_nanny_requests
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_nanny_requests -> {
+                    true
+                }
+                R.id.nav_nanny_profile -> {
+                    val intent = Intent(this, nanny_profile::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
         }
     }
 

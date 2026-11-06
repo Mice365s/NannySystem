@@ -15,7 +15,7 @@ class booking : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_booking) // Replace with your exact XML name
+        setContentView(R.layout.activity_booking)
 
         db = FirebaseFirestore.getInstance()
         sessionManager = SessionManager(this)
@@ -23,9 +23,9 @@ class booking : AppCompatActivity() {
         // 1. Get the Parent's details from the session
         val parentId = sessionManager.getUserDetails()[SessionManager.KEY_USER_ID] ?: ""
         val parentName = sessionManager.getUserDetails()[SessionManager.KEY_NAME] ?: "Unknown Parent"
-        // 2. Get the Nanny's details from the Intent (passed from NannyAdapter)
-        val nannyId = intent.getStringExtra("nannyId") ?: ""
-        val nannyName = intent.getStringExtra("nannyName") ?: "Unknown Nanny"
+        // 2. Get the Nanny's details from the Intent
+        val nannyId = intent.getStringExtra("NANNY_ID") ?: ""
+        val nannyName = intent.getStringExtra("NANNY_NAME") ?: "Unknown Nanny"
 
         // Bind XML views
         val tvNannyName = findViewById<TextView>(R.id.tvBookingNannyName)
@@ -47,6 +47,9 @@ class booking : AppCompatActivity() {
                 Toast.makeText(this, "Please enter date and time", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
+            // Put this right before the "if" statement!
+            Toast.makeText(this, "Parent: $parentId | Nanny: $nannyId", Toast.LENGTH_LONG).show()
 
             if (parentId == null || nannyId.isEmpty()) {
                 Toast.makeText(this, "Error: Missing user data", Toast.LENGTH_SHORT).show()

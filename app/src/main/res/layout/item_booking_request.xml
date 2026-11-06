@@ -17,16 +17,15 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Parent Name -->
+        <!-- Parent Name (Now allowed to span the full width) -->
         <TextView
             android:id="@+id/tvReqParentName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:textColor="#A06A3B"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvReqStatus"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,20 +37,23 @@
             android:layout_marginTop="4dp"
             android:textColor="#757575"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/tvReqParentName"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvReqParentName" />
 
-        <!-- Status (Anchored to the top right) -->
+        <!-- Status (Moved to its own line so it can be as long as it needs to be) -->
         <TextView
             android:id="@+id/tvReqStatus"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:textAllCaps="true"
+            android:textColor="#0000FF"
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReqDateTime" />
 
         <!-- Action Buttons Row (Accept / Decline) -->
         <LinearLayout
@@ -60,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/tvReqDateTime">
+            app:layout_constraintTop_toBottomOf="@+id/tvReqStatus">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDeclineReq"
@@ -83,21 +85,35 @@
                 android:backgroundTint="#3A8F46"
                 android:text="Accept"
                 android:textColor="#FFFFFF" />
-
         </LinearLayout>
+
+        <!-- Chat Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnChat"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Message"
+            android:textColor="#A06A3B"
+            app:strokeColor="#A06A3B"
+            app:strokeWidth="1dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/layoutActionButtons" /> <!-- Anchored below the Accept/Decline row -->
+
 
         <!-- Complete Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#A06A3B"
             android:text="Mark Job as Completed"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/tvReqDateTime" />
+            app:layout_constraintTop_toBottomOf="@+id/btnChat" /> <!-- Anchored directly below the Chat button -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
