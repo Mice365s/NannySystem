@@ -1,63 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAECD9"
-    android:orientation="vertical">
+    android:background="#FAECD9">
 
-    <!-- Header -->
-    <LinearLayout
+    <!-- Header Section (With drop shadow for depth) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F3D8B6"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:elevation="4dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvNannyWelcome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
             android:textColor="#A06A3B"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnEditProfile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <!-- Profile -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditProfile"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#3A8F46"
+            android:layout_marginEnd="4dp"
             android:text="Profile"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            android:layout_marginEnd="8dp"/>
+            android:textColor="#3A8F46"
+            app:strokeColor="#3A8F46"
+            app:strokeWidth="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnNannyLogout"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <!-- Logout: Changed to a Text Button so the header isn't too heavy -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNannyLogout"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#D32F2F"
             android:text="Logout"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp" />
-    </LinearLayout>
+            android:textColor="#D32F2F"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Subheading -->
     <TextView
+        android:id="@+id/tvSectionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="12dp"
         android:text="Your Booking Requests"
+        android:textColor="#A06A3B"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#000000"
-        android:padding="16dp"/>
+        app:layout_constraintTop_toBottomOf="@id/headerLayout" />
 
-    <!-- The List of Bookings -->
+    <!-- The Scrolling List of Bookings -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBookingRequests"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        android:clipToPadding="false" />
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingHorizontal="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSectionTitle" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

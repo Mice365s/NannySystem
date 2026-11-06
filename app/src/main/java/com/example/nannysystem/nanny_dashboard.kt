@@ -38,7 +38,7 @@ class nanny_dashboard : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnNannyLogout).setOnClickListener {
-            sessionManager.logoutUser()
+            startActivity(Intent(this,login::class.java))
         }
 
         // Setup RecyclerView

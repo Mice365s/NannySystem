@@ -31,9 +31,21 @@ class home_dashboard : AppCompatActivity() {
         nannyAdapter = NannyAdapter(nannyList)
         rvNannies.adapter = nannyAdapter
 
+       //log out button
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         btnLogout.setOnClickListener {
+            // Clear the saved session data
             sessionManager.logoutUser()
+
+            //Redirect to the Login screen
+            val intent = Intent(this, login::class.java)
+
+            //Clear the activity backstack so they can't use the back arrow to bypass the login
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
+            // Close the home_dashboard
+            finish()
         }
 
         // Added Help Button Logic

@@ -6,6 +6,5 @@ data class Nanny(
     val location: String = "",
     val hourlyRate: String = "",
     val bio: String = "",
-    val profileImageUrl: String = "",
     val rating: Double = 0.0
 )

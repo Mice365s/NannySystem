@@ -32,7 +32,7 @@ class payment_dashboard : AppCompatActivity() {
         val etCvv = findViewById<EditText>(R.id.etCvv)
         val rbNannyRating = findViewById<RatingBar>(R.id.rbNannyRating) // Added RatingBar
         val btnSubmit = findViewById<Button>(R.id.btnSubmitPayment)
-        val tvCancel = findViewById<TextView>(R.id.tvCancelPayment)
+        val tvCancel = findViewById<TextView>(R.id.btnCancelPayment)
 
         btnSubmit.setOnClickListener {
             val card = etCardNumber.text.toString().trim()

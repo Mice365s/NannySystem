@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide
 class NannyAdapter(private val nannyList: List<Nanny>) : RecyclerView.Adapter<NannyAdapter.NannyViewHolder>() {
 
     class NannyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivPic: ImageView = view.findViewById(R.id.ivNannyPic)
         val tvName: TextView = view.findViewById(R.id.tvNannyName)
         val tvLocation: TextView = view.findViewById(R.id.tvNannyLocation)
         val tvRating: TextView = view.findViewById(R.id.tvNannyRating) // Added Rating View
@@ -37,19 +36,16 @@ class NannyAdapter(private val nannyList: List<Nanny>) : RecyclerView.Adapter<Na
             holder.tvRating.text = "⭐ New"
         }
 
-        // Load image from Firestore URL using Glide
-        if (nanny.profileImageUrl.isNotEmpty()) {
-            Glide.with(holder.itemView.context)
-                .load(nanny.profileImageUrl)
-                .circleCrop()
-                .into(holder.ivPic)
-        }
-
         // Make the card clickable to go to the Booking screen
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, booking::class.java)
-            intent.putExtra("nannyId", nanny.id)
-            intent.putExtra("nannyName", nanny.name)
+            val intent = Intent(holder.itemView.context, parent_view_nanny::class.java)
+            intent.putExtra("NANNY_ID", nanny.id)
+            intent.putExtra("NANNY_NAME", nanny.name)
+            intent.putExtra("NANNY_LOCATION", nanny.location)
+            intent.putExtra("NANNY_RATE", nanny.hourlyRate)
+            intent.putExtra("NANNY_BIO", nanny.bio)
+            intent.putExtra("NANNY_RATING", nanny.rating.toString())
+
             holder.itemView.context.startActivity(intent)
         }
     }

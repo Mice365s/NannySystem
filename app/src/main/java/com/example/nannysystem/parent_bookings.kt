@@ -22,7 +22,7 @@ class parent_bookings : AppCompatActivity() {
         // Ensure you have a RecyclerView with the ID 'rvParentBookings' in activity_parent_bookings.xml
         setContentView(R.layout.activity_parent_bookings)
 
-        findViewById<TextView>(R.id.tvBackToHome).setOnClickListener {
+        findViewById<TextView>(R.id.btnBackToHome).setOnClickListener {
             finish() // This returns the parent to the dashboard
         }
 

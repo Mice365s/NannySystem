@@ -27,12 +27,13 @@ class booking : AppCompatActivity() {
         val nannyId = intent.getStringExtra("nannyId") ?: ""
         val nannyName = intent.getStringExtra("nannyName") ?: "Unknown Nanny"
 
-        // Bind XML views (Update these IDs if yours are different)
+        // Bind XML views
         val tvNannyName = findViewById<TextView>(R.id.tvBookingNannyName)
         val etDate = findViewById<EditText>(R.id.etBookingDate)
         val etTime = findViewById<EditText>(R.id.etBookingTime)
+        val etLocation = findViewById<EditText>(R.id.etBookingLocation)
         val btnConfirm = findViewById<Button>(R.id.btnConfirmBooking)
-        val tvCancel = findViewById<TextView>(R.id.tvCancelBooking)
+        val tvCancel = findViewById<TextView>(R.id.btnCancelBooking)
 
         // Show who we are booking
         tvNannyName.text = "Booking Request for: $nannyName"
