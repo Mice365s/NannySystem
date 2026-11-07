@@ -38,7 +38,7 @@ class admin_panel : AppCompatActivity() {
         }
 
         findViewById<MaterialButton>(R.id.btnActiveBookings).setOnClickListener {
-            // startActivity(Intent(this, AdminReportsActivity::class.java))
+            startActivity(Intent(this, AdminReportsActivity::class.java))
             Toast.makeText(this, "Opening Bookings...", Toast.LENGTH_SHORT).show()
         }
 
