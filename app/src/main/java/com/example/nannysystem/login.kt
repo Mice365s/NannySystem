@@ -56,16 +56,25 @@ class login : AppCompatActivity() {
                         val userId = auth.currentUser?.uid
 
                         if (userId != null) {
-                            // 4. Fetch the user's Name and Role from Firestore
+                            // 4. Fetch the user's Name, Role, and Status from Firestore
                             db.collection("users").document(userId).get()
                                 .addOnSuccessListener { document ->
                                     if (document != null && document.exists()) {
                                         val name = document.getString("name") ?: "User"
                                         val role = document.getString("role") ?: "parent"
 
-                                        val numericId = userId.hashCode()
+                                        // Fetch the new account status (defaults to approved for older accounts/parents)
+                                        val accountStatus = document.getString("accountStatus") ?: "approved"
 
-                                        // Create the secure session
+                                        // SAFETY CHECK: Lock out pending Nannies!
+                                        if (role == "nanny" && accountStatus == "pending") {
+                                            Toast.makeText(this, "Your account is still pending admin approval.", Toast.LENGTH_LONG).show()
+                                            auth.signOut() // Kick them back out
+                                            btnLogin.isEnabled = true // Turn the button back on
+                                            return@addOnSuccessListener // Stop the login process right here
+                                        }
+
+                                        // If they pass the check, create the secure session
                                         sessionManager.createLoginSession(userId, name, email, role)
                                         Toast.makeText(this, "Welcome back, $name!", Toast.LENGTH_SHORT).show()
 

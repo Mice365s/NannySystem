@@ -9,7 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class register : AppCompatActivity() {
 
-    // 1. Replace DatabaseHelper with Firebase instances
+    // Replace DatabaseHelper with Firebase instances
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
@@ -64,21 +64,40 @@ class register : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val userId = auth.currentUser?.uid ?: ""
 
-                        // 4. Save extra user details (Name, Role) to Firestore
+                        // Determine their account status based on the role
+                        val status = if (role == "nanny") {
+                            "pending" // Nannies must wait for admin approval
+                        } else {
+                            "approved" // Parents are approved automatically
+                        }
+
+                        // 4. Save extra user details to Firestore
                         val userMap = hashMapOf(
                             "name" to name,
                             "email" to email,
-                            "role" to role
+                            "role" to role,
+                            "accountStatus" to status // Added the new status field here!
                         )
 
                         db.collection("users").document(userId).set(userMap)
                             .addOnSuccessListener {
-                                Toast.makeText(this, "Registration Successful! Please login.", Toast.LENGTH_LONG).show()
+                                if (role == "nanny") {
+                                    Toast.makeText(this, "Registration Successful! Please wait for admin approval.", Toast.LENGTH_LONG).show()
 
-                                // Navigate to Login Activity
-                                val intent = Intent(this, login::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
+                                    // Force sign out immediately so they can't bypass the login screen lock
+                                    auth.signOut()
+
+                                    val intent = Intent(this, login::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
+                                } else {
+                                    Toast.makeText(this, "Registration Successful! Please login.", Toast.LENGTH_LONG).show()
+
+                                    // Parents can proceed to login normally
+                                    val intent = Intent(this, login::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
+                                }
                             }
                             .addOnFailureListener { e ->
                                 Toast.makeText(this, "Failed to save user data: ${e.message}", Toast.LENGTH_LONG).show()

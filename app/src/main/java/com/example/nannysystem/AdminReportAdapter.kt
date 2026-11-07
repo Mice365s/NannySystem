@@ -7,31 +7,37 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class AdminReportAdapter(private val reportList: List<BookingModel>) : RecyclerView.Adapter<AdminReportAdapter.ViewHolder>() {
+class AdminReportAdapter(private val reportList: List<BookingModel>) :
+    RecyclerView.Adapter<AdminReportAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvNames: TextView = view.findViewById(R.id.tvReportNames)
-        val tvDateTime: TextView = view.findViewById(R.id.tvReportDateTime)
-        val tvStatus: TextView = view.findViewById(R.id.tvReportStatus)
+        val tvReportNames: TextView = view.findViewById(R.id.tvReportNames)
+        val tvReportDateTime: TextView = view.findViewById(R.id.tvReportDateTime)
+        val tvReportStatus: TextView = view.findViewById(R.id.tvReportStatus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_admin_report, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_admin_report, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val booking = reportList[position]
 
-        holder.tvNames.text = "Parent: ${booking.parentName} | Nanny: ${booking.nannyName}"
-        holder.tvDateTime.text = "Date: ${booking.date} at ${booking.time}"
-        holder.tvStatus.text = "Status: ${booking.status.uppercase()}"
+        // Combine both names into the single TextView provided in your XML
+        holder.tvReportNames.text = "Parent: ${booking.parentName}\nNanny: ${booking.nannyName}"
 
-        when (booking.status) {
-            "paid" -> holder.tvStatus.setTextColor(Color.parseColor("#3A8F46")) // Green
-            "declined", "rejected" -> holder.tvStatus.setTextColor(Color.parseColor("#D32F2F")) // Red
-            "completed" -> holder.tvStatus.setTextColor(Color.parseColor("#0000FF")) // Blue
-            else -> holder.tvStatus.setTextColor(Color.parseColor("#FFA500")) // Orange
+        holder.tvReportDateTime.text = "Date: ${booking.date} | Time: ${booking.time}"
+        holder.tvReportStatus.text = booking.status.uppercase()
+
+        // Apply color coding based on the status
+        when (booking.status.lowercase()) {
+            "accepted" -> holder.tvReportStatus.setTextColor(Color.parseColor("#3A8F46")) // Green
+            "completed" -> holder.tvReportStatus.setTextColor(Color.parseColor("#FFA500")) // Orange
+            "paid" -> holder.tvReportStatus.setTextColor(Color.parseColor("#0000FF")) // Blue
+            "pending" -> holder.tvReportStatus.setTextColor(Color.parseColor("#757575")) // Grey
+            else -> holder.tvReportStatus.setTextColor(Color.parseColor("#D32F2F")) // Red (Declined)
         }
     }
 

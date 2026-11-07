@@ -1,93 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAECD9"
-    android:orientation="vertical">
+    android:background="#FAECD9">
 
-    <LinearLayout
+    <!-- Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/adminHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F3D8B6"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:elevation="4dp"
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/app_name"
-            android:textColor="#A06A3B"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvLogoutAdmin"
+            android:id="@+id/tvAdminTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@string/logout"
+            android:text="Admin Control Panel"
+            android:textColor="#A06A3B"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAdminLogout"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
             android:textColor="#D32F2F"
-            android:textStyle="bold" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Stats Row: Total Users -->
+    <LinearLayout
+        android:id="@+id/layoutStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/adminHeader">
+
+        <!-- Parent Count Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:strokeColor="#E4D1BB"
+            app:strokeWidth="1dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Parents"
+                    android:textColor="#757575"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvTotalParents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#A06A3B"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Nanny Count Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:strokeColor="#E4D1BB"
+            app:strokeWidth="1dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Nannies"
+                    android:textColor="#757575"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvTotalNannies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#3A8F46"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
+    <!-- Navigation Menu -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E0E0E0"
-        android:padding="12dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/admin_panel_title"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
-        android:padding="32dp">
+        android:paddingHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/layoutStats">
 
-        <TextView
-            android:id="@+id/tvTotalUsers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnApproveNannies"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:layout_marginBottom="16dp"
-            android:text="Total Users: --"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+            android:backgroundTint="#3A8F46"
+            android:text="Approve New Nannies"
+            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tvTotalBookings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:text="Total Bookings: --"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnManageUsers"
-            android:layout_width="200dp"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="#D1D1D1"
-            android:text="@string/manage_users_btn"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:backgroundTint="#A06A3B"
+            android:text="Manage All Users"
+            android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btnViewReports"
-            android:layout_width="200dp"
-            android:layout_height="55dp"
-            android:backgroundTint="#D1D1D1"
-            android:text="@string/view_reports_btn"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnActiveBookings"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="View Active Bookings"
+            android:textColor="#A06A3B"
+            android:textSize="16sp"
+            app:strokeColor="#A06A3B"
+            app:strokeWidth="2dp" />
     </LinearLayout>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

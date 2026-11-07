@@ -46,6 +46,10 @@
         <activity
             android:name=".chat_screen" />
         <activity
+            android:name=".admin_approve_nannies" />
+        <activity
+            android:name=".admin_manage_users" />
+        <activity
             android:name=".login"
             android:exported="true">
             <intent-filter>

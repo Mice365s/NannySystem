@@ -10,39 +10,43 @@ import com.google.firebase.firestore.FirebaseFirestore
 class AdminReportsActivity : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
-    private lateinit var rvReports: RecyclerView
-    private lateinit var reportList: ArrayList<BookingModel>
     private lateinit var adapter: AdminReportAdapter
+    private val bookingList = mutableListOf<BookingModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_reports)
 
         db = FirebaseFirestore.getInstance()
-        rvReports = findViewById(R.id.rvAdminReports)
-        rvReports.layoutManager = LinearLayoutManager(this)
 
-        reportList = arrayListOf()
-        adapter = AdminReportAdapter(reportList)
+        // Updated ID to match your XML exactly: rvAdminReports
+        val rvReports = findViewById<RecyclerView>(R.id.rvAdminReports)
+        rvReports.layoutManager = LinearLayoutManager(this)
+        adapter = AdminReportAdapter(bookingList)
         rvReports.adapter = adapter
 
-        fetchAllBookings()
+        fetchReports()
     }
 
-    private fun fetchAllBookings() {
-        db.collection("bookings").get()
-            .addOnSuccessListener { documents ->
-                reportList.clear()
-                for (document in documents) {
-                    val booking = document.toObject(BookingModel::class.java)
-                    // Firestore requires empty constructor in data class, or manual mapping:
-                    // If you don't have an empty constructor, manually map it like you did in other screens.
-                    reportList.add(booking)
+    private fun fetchReports() {
+        db.collection("bookings")
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Toast.makeText(this, "Failed to load reports.", Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+
+                bookingList.clear()
+                if (snapshots != null) {
+                    for (doc in snapshots) {
+                        val booking = doc.toObject(BookingModel::class.java)
+                        if (booking.id.isEmpty()) {
+                            booking.id = doc.id
+                        }
+                        bookingList.add(booking)
+                    }
                 }
                 adapter.notifyDataSetChanged()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to load reports: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }
