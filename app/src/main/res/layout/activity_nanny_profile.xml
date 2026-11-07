@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nannyBottomNav"
         app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
         <LinearLayout
